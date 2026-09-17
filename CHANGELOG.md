@@ -3,6 +3,14 @@
 All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.1] — 2026-09-17
+
+### Fixed
+- The pre-1.0 migration silently dropped send history, because the copy was
+  guarded on a column that had already been replaced by the time the guard ran.
+  An empty history makes the poller treat every video in a feed as new, so
+  anything published after a channel was originally added gets re-announced.
+
 ## [1.0.0] — 2026-09-17
 
 First public release.
