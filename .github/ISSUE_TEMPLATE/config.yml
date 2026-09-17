@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/BBareth/herald/security/advisories/new
+    about: Please report security issues privately, not as a public issue. See SECURITY.md.
+  - name: Subscriptions say "verified" but never "active"
+    url: https://github.com/BBareth/herald/blob/main/README.md#subscription-states
+    about: That is normal. A channel that has not uploaded since you subscribed cannot prove a push works.
+  - name: Everything says "failed" with 503 Transient error
+    url: https://github.com/BBareth/herald/blob/main/docs/SETUP.md#troubleshooting
+    about: Google's hub throttles, sometimes for hours. herald retries and the feed poller keeps delivering. Nothing to fix.

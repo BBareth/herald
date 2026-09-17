@@ -1,0 +1,32 @@
+name: Feature request
+description: Suggest something herald should be able to do.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        herald is deliberately small: one container, one SQLite file, no
+        external services. A proposal is most useful when it explains why it
+        belongs inside that shape.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What are you trying to get done that is awkward or impossible today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: What you have in mind
+      description: A sketch is fine. Say how you would expect it to behave.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you tried instead
+      description: Workarounds, other bots, or why the current setup does not cover it.

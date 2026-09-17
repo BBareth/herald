@@ -1,0 +1,94 @@
+name: Bug report
+description: Something behaves differently than documented.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Two things that look like bugs but are not, both covered in the README:
+
+        - A subscription stuck on **`verified`** just means nothing has been
+          uploaded since you subscribed. It is healthy.
+        - **`503 Transient error`** is Google's hub throttling. herald honours
+          its `Retry-After` and the feed poller delivers meanwhile.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you got instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Added https://youtube.com/@someone to a server
+        2. They uploaded a video
+        3. Nothing was posted, and the channel still shows ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part
+      options:
+        - Notifications not arriving
+        - Duplicate or unwanted notifications
+        - Dashboard / server picker
+        - Discord login
+        - WebSub push / callback
+        - Deployment, Docker, upgrade
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: delivery
+    attributes:
+      label: How is delivery configured
+      description: Is WEBSUB_CALLBACK_BASE_URL set, and does anything sit in front of it?
+      options:
+        - Polling only (no public callback URL)
+        - Push, direct or via a reverse proxy
+        - Push, behind Cloudflare
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Image tag or commit SHA you are running.
+      placeholder: "ghcr.io/bbareth/herald:1.0.2 (or a commit SHA)"
+    validations:
+      required: true
+
+  - type: input
+    id: platform
+    attributes:
+      label: Host
+      placeholder: "Docker 27 on Debian 12, x86_64 — or: built from source on macOS 15"
+    validations:
+      required: true
+
+  - type: textarea
+    id: status
+    attributes:
+      label: Status output
+      description: >
+        `curl -s localhost:8080/api/status` says what herald believes about its
+        own delivery, which is usually the fastest way to the answer.
+        Redact ids you would rather not share.
+      render: json
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: "`docker logs herald`. Redact tokens and secrets first."
+      render: shell
