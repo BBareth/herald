@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "better-sqlite3": "^9.2.2",
+    "better-sqlite3": "^13.0.3",
     "cookie-parser": "^1.4.7",
     "discord.js": "^14.14.0",
     "dotenv": "^16.3.1",
