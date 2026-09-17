@@ -1,7 +1,12 @@
 version: 2
+
+# Majors for the framework-shaped dependencies are migrations, not bumps —
+# express 5, React 19, Vite 8 and a TypeScript major each need code changes and
+# deserve a deliberate decision rather than a weekly PR that always fails CI.
+# Minors and patches are grouped so they arrive as one PR per tree.
 updates:
   # herald has two npm trees rather than one: the server and the dashboard are
-  # built in separate Docker stages and have no shared lockfile.
+  # built in separate Docker stages and share no lockfile.
   - package-ecosystem: npm
     directory: /backend
     schedule:
@@ -10,6 +15,15 @@ updates:
     groups:
       npm-minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      - dependency-name: express
+        update-types: [version-update:semver-major]
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
+      # @types/node tracks the runtime in the Dockerfile, not the newest
+      # release; letting it run ahead types code against APIs node 22 lacks.
+      - dependency-name: "@types/node"
+        update-types: [version-update:semver-major]
 
   - package-ecosystem: npm
     directory: /frontend
@@ -19,6 +33,17 @@ updates:
     groups:
       npm-minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      - dependency-name: react
+        update-types: [version-update:semver-major]
+      - dependency-name: react-dom
+        update-types: [version-update:semver-major]
+      - dependency-name: vite
+        update-types: [version-update:semver-major]
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
+      - dependency-name: "@types/node"
+        update-types: [version-update:semver-major]
 
   - package-ecosystem: github-actions
     directory: /
@@ -29,3 +54,8 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    ignore:
+      # The Node major is the runtime contract for better-sqlite3's native
+      # build; move it on purpose, with a rebuild to prove it.
+      - dependency-name: node
+        update-types: [version-update:semver-major]
