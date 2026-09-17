@@ -1,0 +1,11 @@
+**/node_modules
+**/dist
+**/build
+.git
+.github
+data
+docs
+*.md
+.env
+.env.*
+!.env.example

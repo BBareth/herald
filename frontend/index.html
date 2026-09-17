@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0e1014" />
+    <meta
+      name="description"
+      content="Self-hosted Discord notifications for new YouTube uploads"
+    />
+    <title>herald</title>
+    <script>
+      // Applied before React mounts so a reload never flashes the wrong theme.
+      try {
+        var t = localStorage.getItem('herald.theme');
+        document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+      } catch (e) {}
+    </script>
+    </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>

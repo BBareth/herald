@@ -1,0 +1,19 @@
+services:
+  herald:
+    image: ghcr.io/bbareth/herald:latest
+    container_name: herald
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - herald_data:/data
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  herald_data:
