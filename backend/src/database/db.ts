@@ -290,8 +290,12 @@ function migrateFromSingleGuild(database: Database.Database): void {
         );
     }
 
-    // Re-home the old history onto the new watches, preserving dedupe.
-    if (columnNames(database, 'video_history').has('channel_id')) {
+    // Re-home the old history onto the new watches, preserving dedupe. The
+    // condition must test the legacy table, not a column on `video_history` —
+    // that has already been recreated with the new schema by the time this
+    // runs, so checking it silently skipped the copy and let the poller
+    // re-announce videos that had in fact already been sent.
+    if (tableExists(database, 'video_history_legacy')) {
       database.exec(`
         INSERT OR IGNORE INTO video_history (id, watch_id, video_id, title, source, sent_at)
         SELECT v.id, v.channel_id, v.video_id, v.title, v.source, v.sent_at
