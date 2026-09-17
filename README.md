@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="./docs/logo.svg" alt="" width="96" height="96">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="./docs/logo-light.svg">
+    <img src="./docs/logo.svg" alt="" width="96" height="96">
+  </picture>
 </p>
 
 <h1 align="center">herald</h1>

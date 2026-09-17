@@ -3,6 +3,18 @@
 All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.2] — 2026-09-17
+
+### Added
+- A favicon for the dashboard, so the browser tab carries the logo rather than
+  the generic default.
+- Dependabot for both npm trees, the GitHub Actions workflows, and the base
+  images.
+
+### Changed
+- The header mark now exists as an SVG asset rather than only as a CSS rule,
+  and the README shows it, with a light-background variant.
+
 ## [1.0.1] — 2026-09-17
 
 ### Fixed

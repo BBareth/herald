@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="herald">
+  <title>herald</title>
+  <!-- The dashboard's header mark, which until now existed only as CSS: a
+       rounded square in the accent colour with a play glyph. Corner radius and
+       fill track the .header-mark rule and the accent custom property. -->
+  <rect width="128" height="128" rx="32" fill="#ff4b4b"/>
+  <path d="M54 45 L86 64 L54 83 Z"
+        fill="#ffffff" stroke="#ffffff" stroke-width="11" stroke-linejoin="round"/>
+</svg>
