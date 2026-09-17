@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ---- dashboard ---------------------------------------------------------------
-FROM node:22-alpine AS frontend
+FROM node:26-alpine AS frontend
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm ci
@@ -9,7 +9,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # ---- server (TypeScript -> JavaScript) ---------------------------------------
-FROM node:22-alpine AS backend
+FROM node:26-alpine AS backend
 WORKDIR /app/backend
 COPY backend/package*.json ./
 # Type definitions are all tsc needs; skipping install scripts avoids compiling
@@ -22,14 +22,14 @@ RUN npm run build
 # ---- production dependencies -------------------------------------------------
 # better-sqlite3 ships no musl prebuild, so it is compiled here. Doing it in its
 # own stage keeps python/make/g++ out of the image that actually ships.
-FROM node:22-alpine AS deps
+FROM node:26-alpine AS deps
 WORKDIR /app
 RUN apk add --no-cache python3 make g++
 COPY backend/package*.json ./
 RUN npm ci --omit=dev && npm cache clean --force
 
 # ---- runtime -----------------------------------------------------------------
-FROM node:22-alpine
+FROM node:26-alpine
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
