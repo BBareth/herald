@@ -48,6 +48,13 @@ updates:
         update-types: [version-update:semver-major]
       - dependency-name: "@types/node"
         update-types: [version-update:semver-major]
+      # The React type packages have to match the React major. Left free, a
+      # types bump drags react/react-dom along in a combined PR and slips past
+      # the ignores above.
+      - dependency-name: "@types/react"
+        update-types: [version-update:semver-major]
+      - dependency-name: "@types/react-dom"
+        update-types: [version-update:semver-major]
 
   - package-ecosystem: github-actions
     directory: /

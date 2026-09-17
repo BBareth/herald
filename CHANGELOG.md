@@ -3,6 +3,19 @@
 All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.3] — 2026-09-17
+
+### Changed
+- Dependency upgrades, notably better-sqlite3 9 to 13, verified against a real
+  database before merging.
+- `latest` is now only applied when the tag being published is the newest
+  semver in the repository, so re-running an older tag's workflow cannot drag
+  it backwards onto a superseded release.
+- Dependabot ignores majors for the framework-shaped dependencies (express,
+  React, Vite, TypeScript, the Node base image) and for type packages that must
+  track a runtime. Those are migrations needing code changes, not bumps.
+- `main` is protected: pull requests and passing CI are required.
+
 ## [1.0.2] — 2026-09-17
 
 ### Added
